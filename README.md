@@ -1,6 +1,6 @@
 # Scrapbook Checklist - Don't Starve Together
 
-![website demo](./docs/demo.gif)
+![website demo](./docs/demo.png)
 
 Since Don't Starve Together doesn't have achievements, many people use the Scrapbook as an alternative.
 
