@@ -1,92 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Scrapbook Checklist - Don't Starve Together</title>
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="./data/scrapbook_entries.js" defer></script>
     <script src="./js/scripts.js" defer></script>
-    <link rel="shortcut icon" href="./favicon.svg" type="image/x-icon">
-</head>
-<body>
+    <link rel="shortcut icon" href="./favicon.svg" type="image/x-icon" />
+  </head>
+  <body>
     <main>
+      <div class="main">
         <div class="main-container">
-            <div class="sorter">
-                <form>
-                    <input type="text" placeholder="Search">
-                </form>
-                <ul>
-                    <li class="active-event">
-                        <button>
-                            <img src="./assets/images/scrapbook_ui/sort1.png" alt="Sort button 1">
-                        </button>
-                    </li>
-                    <li class="active-event">
-                        <button>
-                            <img src="./assets/images/scrapbook_ui/sort2.png" alt="Sort button 2">
-                        </button>
-                    </li>
-                    <li class="active-event">
-                        <button>
-                            <img src="./assets/images/scrapbook_ui/sort3.png" alt="Sort button 3">
-                        </button>
-                    </li>
-                    <li class="active-event">
-                        <button>
-                            <img src="./assets/images/scrapbook_ui/sort4.png" alt="Sort button 4">
-                        </button>
-                    </li>
-                </ul>
+          <div class="sorter">
+            <form>
+              <input type="text" placeholder="Search" />
+            </form>
+            <ul>
+              <li class="button-events">
+                <button>
+                  <img
+                    src="./assets/images/scrapbook_ui/sort1.png"
+                    alt="Sort button 1"
+                  />
+                </button>
+              </li>
+              <li class="button-events">
+                <button>
+                  <img
+                    src="./assets/images/scrapbook_ui/sort2.png"
+                    alt="Sort button 2"
+                  />
+                </button>
+              </li>
+              <li class="button-events">
+                <button>
+                  <img
+                    src="./assets/images/scrapbook_ui/sort3.png"
+                    alt="Sort button 3"
+                  />
+                </button>
+              </li>
+              <li class="button-events">
+                <button>
+                  <img
+                    src="./assets/images/scrapbook_ui/sort4.png"
+                    alt="Sort button 4"
+                  />
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div class="info-container">
+            <div class="divider">
+              <img
+                src="./assets/images/menu_ui/list_divider_top_middle.png"
+                alt=""
+              />
+              <div>
+                <img
+                  src="./assets/images/menu_ui/list_divider_top_0.png"
+                  alt=""
+                />
+                <div class="middle"></div>
+                <img
+                  src="./assets/images/menu_ui/list_divider_top_2.png"
+                  alt=""
+                />
+              </div>
             </div>
-            <div class="info-container">
-                <div class="divider">
-                    <img src="./assets/images/menu_ui/list_divider_top_middle.png" alt="">
-                    <div>
-                        <img src="./assets/images/menu_ui/list_divider_top_0.png" alt="">
-                        <div class="middle"></div>
-                        <img src="./assets/images/menu_ui/list_divider_top_2.png" alt="">
-                    </div>
-                </div>
-                <section>
-                    <div>
-                        info
-                    </div>
-                    <div>
-                        <ul></ul>
-                    </div>
-                    <!-- <nav class="tabs">
-                        <ul>
-                            <li class="active-event">
-                                <button>Creatures</button>
-                            </li>
-                            <li class="active-event">
-                                <button>Giants</button>
-                            </li>
-                            <li class="active-event">
-                                <button>Items</button>
-                            </li>
-                            <li class="active-event">
-                                <button>Foods</button>
-                            </li>
-                            <li class="active-event">
-                                <button>Things</button>
-                            </li>
-                            <li class="active-event">
-                                <button>Points of Interest</button>
-                            </li>
-                        </ul>
-                    </nav> -->
-                </section>
-                <div class="bottom divider">
-                    <div>
-                        <img src="./assets/images/menu_ui/list_divider_bottom_0.png" alt="">
-                        <div class="middle"></div>
-                        <img src="./assets/images/menu_ui/list_divider_bottom_2.png" alt="">
-                    </div>
-                    <img src="./assets/images/menu_ui/list_divider_bottom_middle.png" alt="">
-                </div>
+            <section>
+              <div class="info-header">info</div>
+              <div class="info-content">
+                <ul></ul>
+              </div>
+            </section>
+            <div class="bottom divider">
+              <div>
+                <img
+                  src="./assets/images/menu_ui/list_divider_bottom_0.png"
+                  alt=""
+                />
+                <div class="middle"></div>
+                <img
+                  src="./assets/images/menu_ui/list_divider_bottom_2.png"
+                  alt=""
+                />
+              </div>
+              <img
+                src="./assets/images/menu_ui/list_divider_bottom_middle.png"
+                alt=""
+              />
             </div>
+          </div>
         </div>
+        <nav class="tabs">
+          <ul>
+            <li class="button-events">
+              <div></div>
+              <img src="./assets/images/scrapbook_ui/tab_1.png" alt="" />
+              <button>Creatures</button>
+            </li>
+            <li class="button-events">
+              <div></div>
+              <img src="./assets/images/scrapbook_ui/tab_2.png" alt="" />
+              <button>Giants</button>
+            </li>
+            <li class="button-events">
+              <div></div>
+              <img src="./assets/images/scrapbook_ui/tab_3.png" alt="" />
+              <button>Items</button>
+            </li>
+            <li class="button-events">
+              <div></div>
+              <img src="./assets/images/scrapbook_ui/tab_4.png" alt="" />
+              <button>Foods</button>
+            </li>
+            <li class="button-events">
+              <div></div>
+              <img src="./assets/images/scrapbook_ui/tab_5.png" alt="" />
+              <button>Things</button>
+            </li>
+            <li class="button-events">
+              <div></div>
+              <img src="./assets/images/scrapbook_ui/tab_6.png" alt="" />
+              <button>Points of Interest</button>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </main>
-</body>
+  </body>
 </html>
