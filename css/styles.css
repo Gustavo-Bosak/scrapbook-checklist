@@ -1,0 +1,185 @@
+/* Base css */
+@font-face {
+  font-family: "Bellefair";
+  src: url("../assets/fonts/Bellefair/Bellefair.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Hammerhead";
+  src: url("../assets/fonts/Hammerhead/Hammerhead.woff2") format("woff2");
+}
+
+*,
+ul,
+a,
+button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    list-style-type: none;
+    text-decoration: none;
+    font: 600 1.1rem "Bellefair";
+    color: #fff;
+}
+
+body {
+    background: #000 url('../assets/images/bg_redux_dark_right.png') center/auto 100% no-repeat;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100lvh;
+    width: 100lvw;
+    padding-block: 4lvh;
+    background: radial-gradient(circle,rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 75%);
+}
+
+/* Components */
+.main-container {
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+}
+
+.sorter {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-right: 5%;
+}
+
+.sorter ul {
+    display: flex;
+    gap: 0.25rem;
+    height: fit-content;
+}
+
+.sorter li {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.sorter button {
+    height: 100%;
+    width: 100%;
+}
+
+.sorter button:hover {
+    transform: scale(1.1);
+}
+
+.sorter img {
+    width: 100%;
+    height: 100%;
+}
+
+input {
+    background: url('../assets/images/menu_ui/textbox3_gold_normal.png') center/auto 100% no-repeat;
+    height: 2.5rem;
+    width: 20.5rem;
+    padding-inline: 5%;
+    color: #000;
+}
+
+input::placeholder {
+    text-align: center;
+    color: #88847C;
+}
+
+input:focus {
+    background: url('../assets/images/menu_ui/textbox3_gold_focus.png') center/auto 100% no-repeat;
+    outline: none;
+}
+
+input:hover {
+    background: url('../assets/images/menu_ui/textbox3_gold_hover.png') center/auto 100% no-repeat;
+}
+
+/*  */
+
+.info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-width: 40rem;
+    width: 60lvw;
+    max-width: 1400px;
+    margin-block: 1rem;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 1.75rem;
+    position: relative;
+}
+
+.divider>img {
+    position: absolute;
+    transform: translateY(-12.5%);
+}
+
+.divider>div {
+    display: flex;
+    align-items: end;
+    width: 100%;
+    height: 100%;
+}
+
+.divider .middle {
+    width: 100%;
+    height: 30%;
+    background: #88847C url('../assets/images/menu_ui/list_divider_bottom_1.png') left/100%;
+}
+
+.bottom>img {
+    transform: translateY(5%);
+}
+
+.bottom>div {
+    align-items: start;
+}
+
+.divider img {
+    height: 100%;
+}
+
+.info-container section {
+    background: rgba(79, 60, 38, 0.6);
+    width: 98%;
+    height: 70lvh;
+}
+
+/*  */
+
+.tabs li {
+    background: #88847C url('../assets/images/scrapbook_ui/tab.png') center/auto 100% no-repeat;
+}
+
+.tabs button {
+    background: none;
+    height: 3.75rem;
+    width: 7.75rem;
+    color: #000;
+    font: 600 0.75rem "Hammerhead";
+    line-height: 0.75rem;
+}
+
+.tabs button:hover {
+    background: url('../assets/images/scrapbook_ui/tab_over.png') center/auto 100% no-repeat;
+}
+
+.active-event:active {
+    transform: translateY(0.2rem);
+}
+
+.selected {
+    background: url('../assets/images/scrapbook_ui/tab_selected.png') center/auto 100% no-repeat;
+}
