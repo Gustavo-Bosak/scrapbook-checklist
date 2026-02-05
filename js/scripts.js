@@ -4,7 +4,7 @@ window.ondragstart = function () { return false; };
 // DOM imports
 const tabs = document.querySelectorAll('.tabs ul li');
 const infoContent = document.querySelector('.info-content ul');
-const sorterButtons = document.querySelectorAll('.sorter ul li')
+const sorterButtons = document.querySelectorAll('.sorter ul li');
 
 // This function renders the content with the data altogether based on the argument, with is the select partition
 function renderCategory(partition) {
@@ -13,7 +13,9 @@ function renderCategory(partition) {
     infoContent.innerHTML = items.map(item => `
     <li>
         <button>
-            <img src="./assets/images/scrapbook_entries/${item.image}.png" alt="${item.name}" decoding="async" loading="lazy">
+            <div class=scrapbook-icon>
+                <img src="./assets/images/scrapbook_entries/${item.image}.png" alt="${item.name}" data-partition="${partition}">
+            </div>
             <div>
                 <p class="subcat">${item.subcat != null ? item.subcat.charAt(0).toUpperCase() + item.subcat.slice(1) + '/' : ''}</p>
                 <p class="name">${item.name}</p>
