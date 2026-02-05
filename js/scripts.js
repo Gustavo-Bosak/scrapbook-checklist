@@ -1,5 +1,5 @@
 // Rules on business
-window.ondragstart = function() { return false; };
+window.ondragstart = function () { return false; };
 
 // DOM imports
 const tabs = document.querySelectorAll('.tabs ul li');
@@ -35,11 +35,11 @@ function setupMenu() {
 
         tab.addEventListener('click', () => {
             if (tab.classList.contains('selected')) return;
-            
+
             document.querySelector('.tabs ul li.selected')?.classList.remove('selected');
-            
+
             tab.classList.add('selected');
-            
+
             renderCategory(pKey);
         });
     });
@@ -54,14 +54,15 @@ function setupMenu() {
 function updateLayout(index) {
     const layouts = [1, 2, 3, 7];
     const totalCols = layouts[index];
-    
+
     infoContent.style.setProperty('--cols', totalCols);
     infoContent.dataset.view = `${totalCols}-cols`;
 }
 
+// This function handles getting and setting .sorter info into localStorage for .info-content layout setting
 function setupLayoutSwitcher() {
     const savedLayoutIndex = localStorage.getItem('scrapbook-layout-index') || 0;
-    
+
     updateLayout(parseInt(savedLayoutIndex));
 
     sorterButtons.forEach((button, index) => {
@@ -72,6 +73,74 @@ function setupLayoutSwitcher() {
     });
 }
 
+function initCustomScrollbar(containerSelector) {
+    const container = document.querySelector(containerSelector);
+    if (!container) return;
+
+    const content = container.querySelector('.info-content, .info');
+    const scrollbar = container.querySelector('.scrollbar');
+    const handle = container.querySelector('.handle');
+    const bar = container.querySelector('.bar');
+    const [arrowUp, arrowDown] = container.querySelectorAll('.arrow');
+
+    const scrollStep = 150;
+
+    const updateScrollUI = () => {
+        const hasScroll = content.scrollHeight > content.clientHeight;
+
+        scrollbar.style.opacity = hasScroll ? "1" : "0";
+        scrollbar.style.pointerEvents = hasScroll ? "auto" : "none";
+
+        if (hasScroll) {
+            const scrollPercentage = content.scrollTop / (content.scrollHeight - content.clientHeight);
+            const maxTop = bar.clientHeight - handle.clientHeight;
+            handle.style.top = `${scrollPercentage * maxTop}px`;
+        }
+    };
+
+    arrowUp.addEventListener('click', () => {
+        content.scrollBy({ top: -scrollStep, behavior: 'smooth' });
+    });
+
+    arrowDown.addEventListener('click', () => {
+        content.scrollBy({ top: scrollStep, behavior: 'smooth' });
+    });
+
+    let isDragging = false;
+    let startY, startScroll;
+
+    handle.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startY = e.pageY - handle.offsetTop;
+        document.body.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const rect = bar.getBoundingClientRect();
+        const y = e.pageY - rect.top - (handle.clientHeight / 2);
+        const maxTop = bar.clientHeight - handle.clientHeight;
+        const clampedY = Math.max(0, Math.min(y, maxTop));
+
+        const scrollPercentage = clampedY / maxTop;
+        content.scrollTop = scrollPercentage * (content.scrollHeight - content.clientHeight);
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        document.body.style.cursor = '';
+    });
+
+    content.addEventListener('scroll', updateScrollUI);
+    window.addEventListener('resize', updateScrollUI);
+
+    const observer = new MutationObserver(updateScrollUI);
+    observer.observe(content, { childList: true, subtree: true });
+    updateScrollUI();
+}
+
 // Function calls
 setupMenu();
 setupLayoutSwitcher();
+initCustomScrollbar('.info-header');
+initCustomScrollbar('.info-content-container');
