@@ -73,6 +73,7 @@ function setupLayoutSwitcher() {
     });
 }
 
+// This function handles the scrollbar behaviors, such as scrolling and clicking .bar, dragging .handle and clicking arrows up and down
 function initCustomScrollbar(containerSelector) {
     const container = document.querySelector(containerSelector);
     if (!container) return;
@@ -104,6 +105,21 @@ function initCustomScrollbar(containerSelector) {
 
     arrowDown.addEventListener('click', () => {
         content.scrollBy({ top: scrollStep, behavior: 'smooth' });
+    });
+
+    bar.addEventListener('mousedown', (e) => {
+        if (e.target === handle) return;
+
+        const targetY = e.pageY - bar.getBoundingClientRect().top - (handle.clientHeight / 2);
+        const maxTop = bar.clientHeight - handle.clientHeight;
+
+        const scrollPercentage = Math.max(0, Math.min(targetY, maxTop)) / maxTop;
+        const targetScroll = scrollPercentage * (content.scrollHeight - content.clientHeight);
+
+        content.scrollTo({
+            top: targetScroll,
+            behavior: 'smooth'
+        });
     });
 
     let isDragging = false;
