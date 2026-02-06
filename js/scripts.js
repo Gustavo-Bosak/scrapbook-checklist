@@ -5,24 +5,70 @@ window.ondragstart = function () { return false; };
 const tabs = document.querySelectorAll('.tabs ul li');
 const infoContent = document.querySelector('.info-content ul');
 const sorterButtons = document.querySelectorAll('.sorter ul li');
+const infoTitle = document.querySelector('.title');
 
-// This function renders the content with the data altogether based on the argument, with is the select partition
+// This function renders the content with the data altogether based on the argument, with is the select partition. It also save the data in localStorage when a rendered item is clicked
 function renderCategory(partition) {
     const items = scrapbookEntriesData[partition] || [];
+    
+    const storage = JSON.parse(localStorage.getItem('scrapbook-checked-items')) || {};
+    const checkedInThisPartition = storage[partition] || [];
 
-    infoContent.innerHTML = items.map(item => `
-    <li>
-        <button>
-            <div class=scrapbook-icon>
-                <img src="./assets/images/scrapbook_entries/${item.image}.png" alt="${item.name}" data-partition="${partition}">
-            </div>
-            <div>
-                <p class="subcat">${item.subcat != null ? item.subcat.charAt(0).toUpperCase() + item.subcat.slice(1) + '/' : ''}</p>
-                <p class="name">${item.name}</p>
-            </div>
-        </button>
-    </li>
-  `).join('');
+    infoContent.innerHTML = items.map(item =>
+        `<li>
+            <button class="${checkedInThisPartition.includes(item.image) ? 'check' : ''}" 
+                    data-value="${item.image}" 
+                    data-partition="${partition}">
+                <div class="scrapbook-icon">
+                    <span></span>
+                    <img src="./assets/images/scrapbook_entries/${item.image}.png" alt="${item.name}">
+                </div>
+                <div>
+                    <p class="subcat">${item.subcat != null ? item.subcat.charAt(0).toUpperCase() + item.subcat.slice(1) + '/' : ''}</p>
+                    <p class="name">${item.name}</p>
+                </div>
+            </button>
+        </li>`
+    ).join('');
+
+    renderTitle();
+}
+
+// This function assigns to the infoContent buttons the check functionality, saving this status in localStorage grouped by the partitions
+function setupDoubleClickHandler() {
+    infoContent.addEventListener('dblclick', (e) => {
+        const button = e.target.closest('button');
+        if (!button) return;
+
+        const entryValue = button.dataset.value;
+        const partition = button.dataset.partition;
+        
+        let storage = JSON.parse(localStorage.getItem('scrapbook-checked-items')) || {};
+        
+        if (!storage[partition]) storage[partition] = [];
+
+        button.classList.toggle('check');
+
+        if (button.classList.contains('check')) {
+            if (!storage[partition].includes(entryValue)) {
+                storage[partition].push(entryValue);
+            }
+        } else {
+            storage[partition] = storage[partition].filter(entry => entry !== entryValue);
+        }
+
+        localStorage.setItem('scrapbook-checked-items', JSON.stringify(storage));
+        updateProgress();
+    });
+}
+
+// This function renders the display name of the entries clicked on a side title
+function renderTitle() {
+    infoContent.querySelectorAll('li button').forEach(element => {
+        element.addEventListener('click', () => {
+            infoTitle.textContent = `${element.querySelector('.name').textContent}`
+        })
+    })
 }
 
 // This function take care of the tabs selection process, it assigns the partitions to its respective buttons and add click events to select and show that selected
@@ -50,6 +96,7 @@ function setupMenu() {
         tabs[0].classList.add('selected');
         renderCategory(partitions[0]);
     }
+    updateProgress();
 }
 
 // This function assings the .sorter buttons to switch the layout of the .info-content in 4 different ways (the amount of columns)
@@ -157,8 +204,20 @@ function initCustomScrollbar(containerSelector) {
     updateScrollUI();
 }
 
+// This function displays the amount of checked items under the total entries to all partitions
+function updateProgress() {
+    const partitions = ['creatures', 'giants', 'items', 'food', 'things', 'POI'];
+    const storage = JSON.parse(localStorage.getItem('scrapbook-checked-items')) || {};
+
+    partitions.forEach(partition => {
+        const progress = document.querySelector(`.progress[data-partition=${partition}]`);
+        progress.textContent = `${storage[partition]?.length || 0} / ${scrapbookEntriesData[partition]?.length || 0}`
+    })
+}
+
 // Function calls
 setupMenu();
 setupLayoutSwitcher();
+setupDoubleClickHandler();
 initCustomScrollbar('.info-header');
 initCustomScrollbar('.info-content-container');
