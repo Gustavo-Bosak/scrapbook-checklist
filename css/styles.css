@@ -402,8 +402,8 @@ main {
 
 .check .scrapbook-icon {
   position: relative;
+  filter: hue-rotate(30deg) brightness(0.75);
 }
-.check img,
 .check p {
   filter: hue-rotate(30deg) brightness(0.75);
 }
