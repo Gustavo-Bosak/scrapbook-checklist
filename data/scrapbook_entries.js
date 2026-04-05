@@ -977,6 +977,7 @@ const scrapbookEntriesData = {
     { name: "Second-hand Dentures", image: "trinket_10", subcat: "trinket" },
     { name: "Shoe Horn", image: "trinket_23", subcat: "trinket" },
     { name: "Snail Scale", image: "trinket_40", subcat: "trinket" },
+    { name: "Spider Ring", image: "trinket_33", subcat: "trinket" },
     { name: "Tiny Rocketship", image: "trinket_5", subcat: "trinket" },
     { name: "Toy Cobra", image: "trinket_42", subcat: "trinket" },
     { name: "Toy Trojan Horse", image: "trinket_18", subcat: "trinket" },
